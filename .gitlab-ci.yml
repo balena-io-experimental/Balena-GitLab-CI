@@ -1,0 +1,12 @@
+balena-push:
+  image: node:latest
+  stage: build
+  cache:
+    untracked: true
+    paths:
+      - node_modules/        
+  script:
+    - npm install balena-cli -g --production --unsafe-perm
+    - balena version
+    - balena login --token $API_TOKEN
+    - balena push $APPLICATION_NAME
